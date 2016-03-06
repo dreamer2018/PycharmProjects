@@ -97,6 +97,21 @@ def BinarySearch_7(a,x):
         if(x==a[left]):
             return left
     return -1
+def BinarySearch(a,x):
+    n=len(a)
+    if(n>0 and x>=a[0] and x<=a[n-1]):
+        left=0
+        right=n-1
+        while(left<=right):
+            middle=(left+right)/2
+            print middle
+            if(x==a[middle]):
+                return middle
+            elif(x<a[middle]):
+                right=middle-1
+            else:
+                left=middle+1
+    return -1
 a=[1,3,6,9,12,15,19,20]
-b=BinarySearch_7(a,3)
+b=BinarySearch(a,15)
 print 'b=',b
