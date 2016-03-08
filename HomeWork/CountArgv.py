@@ -17,6 +17,8 @@ def avg(list):
     return s/(i+1)
 
 def drop_first_last(list):
+    # * 代表列表
+    # ** 代表键值对，如字典
     first,*middle,last=list
     print(type(list))
     return avg(middle)
