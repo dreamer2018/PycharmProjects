@@ -1,10 +1,11 @@
 __author__ = 'zhoupan'
+
 def BinarySearch_1(a,x):
     left=0
     right=len(a)-1
     while(left<=right):
         middle=(left+right)/2
-        print middle
+        print(middle)
         if(x==a[middle]):
             return middle
         if(x>a[middle]):
@@ -17,7 +18,7 @@ def BinarySearch_2(a,x):
     right=len(a)-1
     while(left<right-1):
         middle=(left+right)/2
-        print middle
+        print(middle)
         if(x<a[middle]):
             right=middle
         else:
@@ -31,7 +32,7 @@ def BinarySearch_3(a,x):
     right=len(a)-1
     while(left+1!=right):
         middle=(left+right)/2
-        print middle
+        print(middle)
         if(x>=a[middle]):
             left=middle
         else:
@@ -46,7 +47,7 @@ def BinarySearch_4(a,x):
         right=len(a)-1
         while(left<right):
             middle=(left+right)/2
-            print middle
+            print(middle)
             if(x<a[middle]):
                 right=middle-1
             else:
@@ -60,7 +61,7 @@ def BinarySearch_5(a,x):
         right=len(a)-1
         while(left<right):
             middle=(left+right+1)/2
-            print middle
+            print(middle)
             if(x<a[middle]):
                 right=middle-1
             else:
@@ -74,7 +75,7 @@ def BinarySearch_6(a,x):
         right=len(a)-1
         while(left<right):
             middle=(left+right+1)/2
-            print middle
+            print(middle)
             if(x<a[middle]):
                 right=middle-1
             else:
@@ -87,9 +88,9 @@ def BinarySearch_7(a,x):
         left=0
         right=len(a)-1
         while(left<right):
-            print left,right
+            print(left,right)
             middle=(left+right+1)/2
-            print middle
+            print(middle)
             if(x<a[middle]):
                 right=middle
             else:
@@ -104,7 +105,7 @@ def BinarySearch(a,x):
         right=n-1
         while(left<=right):
             middle=(left+right)/2
-            print middle
+            print(middle)
             if(x==a[middle]):
                 return middle
             elif(x<a[middle]):
@@ -114,4 +115,4 @@ def BinarySearch(a,x):
     return -1
 a=[1,3,6,9,12,15,19,20]
 b=BinarySearch(a,15)
-print 'b=',b
+print('b=',b)

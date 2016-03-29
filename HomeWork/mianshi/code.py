@@ -7,12 +7,12 @@ __author__ = 'zhoupana'
 import sys
 
 #定义编码字典
-drit={'a':'01',   'b':'1000', 'c':'1010', 'd':'100',  'e':'0',
-      'f':'0010', 'g':'110',  'h':'0000', 'i':'00',   'j':'0111',
-      'k':'101',  'l':'0100', 'm':'11',   'n':'10',   'o':'111',
-      'p':'0110', 'q':'1101', 'r':'010',  's':'000',  't':'1',
-      'u':'001',  'v':'0001', 'w':'011',  'x':'1001', 'y':'1011',
-      'z':'1100',
+drit={'A':'01',   'B':'1000', 'C':'1010', 'D':'100',  'E':'0',
+      'F':'0010', 'G':'110',  'H':'0000', 'I':'00',   'J':'0111',
+      'K':'101',  'L':'0100', 'M':'11',   'N':'10',   'O':'111',
+      'P':'0110', 'Q':'1101', 'R':'010',  'S':'000',  'T':'1',
+      'U':'001',  'V':'0001', 'W':'011',  'X':'1001', 'Y':'1011',
+      'Z':'1100',
 
       '1':'01111', '2':'00111', '3':'00011', '4':'00001', '5':'00000',
       '6':'10000', '7':'11000', '8':'11100', '9':'11110', '0':'11111',
@@ -41,7 +41,7 @@ def EncodeReadFile():
             print(string,end="")
             for str in string:
                   try:
-                        decode.write(drit[str.lower()])
+                        decode.write(drit[str.upper()])
                         decode.write(" ")
                   except KeyError:
                         pass
@@ -58,8 +58,8 @@ def DecodeReadFile():
             result=Split(string)
             for str in result:
                   try:
-                       print(drit_reversed[str],end="")
-                       encode.write(drit_reversed[str])
+                       print(drit_reversed[str.upper()],end="")
+                       encode.write(drit_reversed[str.upper()])
                   except KeyError :
                         encode.write(drit_reversed[" "])
                         print(" ",end="")
@@ -69,7 +69,7 @@ def DecodeReadFile():
 def Encode():
       string=input()
       for str in string:
-            print(drit[str.lower()],end=' ')
+            print(drit[str.upper()],end=' ')
             if(str == ' '):
                   print("",end='')
 #字符串分割
@@ -92,7 +92,7 @@ def Decode():
       result=Split(string)
       for str in result:
             try:
-                  print(drit_reversed[str],end="")
+                  print(drit_reversed[str.upper()],end="")
             except KeyError :
                   print(" ",end="")
 #测试
@@ -117,6 +117,6 @@ if __name__ == '__main__':
       #Encode()
       #Decode()
       #解密
-     # DecodeReadFile()
       #加密
-      EncodeReadFile()
+      #EncodeReadFile()
+      DecodeReadFile()
