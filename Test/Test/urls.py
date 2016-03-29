@@ -18,3 +18,4 @@ from Test.view import hello
 
 urlpatterns = patterns("",('^hello/$',hello),)
 
+
