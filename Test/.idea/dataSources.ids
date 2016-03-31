@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="Django default" uuid="5e6ed249-d79a-4a2b-a08e-bc65fd1f7936">
+    <database-info product="MySQL" version="5.6.29" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.5">
+      <schema id="1" name="SPJ"/>
+      <table id="2" parent="1" name="J"/>
+      <table id="3" parent="1" name="P"/>
+      <table id="4" parent="1" name="S"/>
+      <table id="5" parent="1" name="SPJ"/>
+      <column id="6" parent="2" name="JNO">
+        <mandatory>1</mandatory>
+        <data-type>char(2)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="7" parent="2" name="JNAME">
+        <data-type>varchar(10)</data-type>
+      </column>
+      <column id="8" parent="2" name="CITY">
+        <data-type>varchar(10)</data-type>
+      </column>
+      <key id="9" parent="2" name="PRIMARY">
+        <columns>JNO</columns>
+        <primary>1</primary>
+      </key>
+      <column id="10" parent="3" name="PNO">
+        <mandatory>1</mandatory>
+        <data-type>char(2)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="11" parent="3" name="PNAME">
+        <data-type>varchar(10)</data-type>
+      </column>
+      <column id="12" parent="3" name="COLOR">
+        <data-type>char(2)</data-type>
+      </column>
+      <column id="13" parent="3" name="WEIGHT">
+        <data-type>int(11)</data-type>
+      </column>
+      <key id="14" parent="3" name="PRIMARY">
+        <columns>PNO</columns>
+        <primary>1</primary>
+      </key>
+      <column id="15" parent="4" name="SNO">
+        <mandatory>1</mandatory>
+        <data-type>char(2)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="16" parent="4" name="SNAME">
+        <data-type>varchar(20)</data-type>
+      </column>
+      <column id="17" parent="4" name="STATUS">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="18" parent="4" name="CITY">
+        <data-type>varchar(10)</data-type>
+      </column>
+      <key id="19" parent="4" name="PRIMARY">
+        <columns>SNO</columns>
+        <primary>1</primary>
+      </key>
+      <column id="20" parent="5" name="SNO">
+        <mandatory>1</mandatory>
+        <data-type>char(2)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="21" parent="5" name="PNO">
+        <mandatory>1</mandatory>
+        <data-type>char(2)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="22" parent="5" name="JNO">
+        <mandatory>1</mandatory>
+        <data-type>char(2)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="23" parent="5" name="QTY">
+        <data-type>int(11)</data-type>
+      </column>
+      <index id="24" parent="5" name="JNO">
+        <columns>JNO</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="25" parent="5" name="PNO">
+        <columns>PNO</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="26" parent="5" name="PRIMARY">
+        <columns>SNO
+PNO
+JNO</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="27" parent="5" name="SPJ_ibfk_1">
+        <columns>SNO</columns>
+        <ref-key>~.S.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="28" parent="5" name="SPJ_ibfk_2">
+        <columns>PNO</columns>
+        <ref-key>~.P.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="29" parent="5" name="SPJ_ibfk_3">
+        <columns>JNO</columns>
+        <ref-key>~.J.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+    </database-model>
+  </data-source>
+</component>
