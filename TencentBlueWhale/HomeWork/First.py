@@ -10,8 +10,8 @@ a=10
 b=20
 print multiply(a,b)
 
-import xlrd
-file = xlrd.open_workbook('/home/zhoupan/Desktop/TencentBlueWhale/students.xls')
+import xlwd
+file = xlwd.open_workbook('/c/Users/Administrator/PycharmProjects/TencentBlueWhale/HomeWork/')
 
 a[0]=["1","张三",150,120,100]
 a[1]=["2","李四",90,99,95]
