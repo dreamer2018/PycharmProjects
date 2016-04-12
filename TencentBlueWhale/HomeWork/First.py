@@ -51,3 +51,10 @@ else:
     print 'b'
 '''
 #第五题
+import redis
+import random
+r=redis.Redis(host='localhost',port=6379,db=0)
+r.lpush(random,random.random())
+print r.lrange(random,0,5)
+
+
