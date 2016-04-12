@@ -68,14 +68,14 @@ print (1 in [0,1]) == True #true
 #第七题
 import svn
 
+
 #第八题
 import numpy as np
 import matplotlib.pyplot as plt
 
-x=np.linspace(0,20)
+x=np.linspace(-100,100)
 plt.plot(x,x*x*x)
 plt.show()
-'''
 
 import re
 import urllib
@@ -86,12 +86,11 @@ def getHtml(url):
     html = page.read()
     return html
 def gettitle(html):
-    #reg = r'class="explore-feed feed-item" data-offset="[0-9]*"><h2><a class="question_link" target="_black" href="[a-z0-9]*">?</a><h2>'
-    #reg = r'class="explore-feed feed-item" data-offset="[0-9]*">'
-    reg=r'class="question_link" target="_blank" href="\S*">\S*'
-    list = re.compile(reg)
-    list_all= re.findall(list,html)
-    print list_all
+    s = 'class="explore-feed feed-item" data-offset="[0-9]*">\W*<h2><a class="question_link" target="_blank" href="/question(.*?)">(.*?)</a></h2>'
+    ans = re.findall(s, html,re.S)
+    for y in ans:
+        print y[1]
 html = getHtml("https://www.zhihu.com/explore")
+gettitle(html)
 
-print gettitle(html)
+'''
