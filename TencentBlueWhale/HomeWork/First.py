@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 #coding=utf-8
+
 '''
 #第一题：
 __author__ = 'zhoupan'
@@ -49,12 +50,48 @@ if 1 in [1,0] == True:
     print 'a'
 else:
     print 'b'
-'''
+
 #第五题
 import redis
 import random
 r=redis.Redis(host='localhost',port=6379,db=0)
-r.lpush(random,random.random())
-print r.lrange(random,0,5)
+for i in range(0,100):
+    r.lpush(random,random.random())
+print r.lrange(random,0,100)
+
+#第六题
+
+print 1 in [0,1] == True #false
+print (1 in [0,1]) == True #true
 
 
+#第七题
+import svn
+
+#第八题
+import numpy as np
+import matplotlib.pyplot as plt
+
+x=np.linspace(0,20)
+plt.plot(x,x*x*x)
+plt.show()
+'''
+
+import re
+import urllib
+#coding=utf-8
+
+def getHtml(url):
+    page = urllib.urlopen(url)
+    html = page.read()
+    return html
+def gettitle(html):
+    #reg = r'class="explore-feed feed-item" data-offset="[0-9]*"><h2><a class="question_link" target="_black" href="[a-z0-9]*">?</a><h2>'
+    #reg = r'class="explore-feed feed-item" data-offset="[0-9]*">'
+    reg=r'class="question_link" target="_blank" href="\S*">\S*'
+    list = re.compile(reg)
+    list_all= re.findall(list,html)
+    print list_all
+html = getHtml("https://www.zhihu.com/explore")
+
+print gettitle(html)
