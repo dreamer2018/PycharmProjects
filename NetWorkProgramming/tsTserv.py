@@ -6,7 +6,7 @@
 from socket import *
 from time import ctime
 
-HOST='localhost'
+HOST='192.168.30.98'
 PORT=8000
 BUFSIZE=1024
 ADDR=(HOST,PORT)
