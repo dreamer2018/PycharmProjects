@@ -5,8 +5,8 @@
 
 from socket import *
 
-HOST='192.168.30.98'
-PORT=8000
+HOST='localhost'
+PORT=8080
 BUFSIZE=1024
 ADDR=(HOST,PORT)
 
