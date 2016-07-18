@@ -19,7 +19,7 @@ while True:
     print('服务器监听中......')
     tcpCliSock,addr = tcpSerSock.accept()
     print('connect from ',addr)
-    while True:
+    while Tru
         data=tcpCliSock.recv(BUFSIZE).decode()
         if not data:
             break
