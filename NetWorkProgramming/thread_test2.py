@@ -27,7 +27,7 @@ def main():
     locks=[]
 
     for i in range(len(loops)):
-        lock = thread.allocate_lock() #创建锁
+        lock = thread.allocate_lock() #创 建锁
         lock.acquire() #获得锁
         locks.append(lock)
     for i in range(len(loops)):
