@@ -26,5 +26,8 @@ def temp_simp(request):
     now = ctime()
     return render_to_response('temp.html',{'current_date':now})
 def local_test(request):
-    currect_date = ctime()
-    return render_to_response('temp.html',locals())
+    current_date = ctime()
+    return render_to_response('current_datetime.html',locals())
+def my(request):
+    return render_to_response('my_time.html')
+
