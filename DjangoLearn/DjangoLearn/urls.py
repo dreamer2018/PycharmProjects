@@ -17,5 +17,5 @@ from django.conf.urls import *
 from DjangoLearn.view import *
 
 urlpatterns = [
-    url(r'^$',index),url(r'^hello/$',hello),url(r'^time/(\d{1,2})/$',hour_ahead)
+    url(r'^$',index),url(r'^hello/$',hello),url(r'^time/(\d{1,2})/$',hour_ahead),url(r'^temp/$',temp_time),url(r'^simple/$',temp_simp)
 ]
