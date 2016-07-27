@@ -6,7 +6,6 @@ def hello(request):
 def index(request):
     return HttpResponse('<html><body><p>time: %s </p></body></html>' % ctime())
 def hour_ahead(request,offset):
-
     try:
         offset=int(offset)
     except ValueError:
