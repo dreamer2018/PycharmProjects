@@ -43,6 +43,3 @@ if __name__ == "__main__":
     print(c['name'])
     print('--------------------------------------------------------------------')
     t="my name is {{ name }},I am a {% if sex %} boy {% else %} girl {% endif %}"
-
-
-
