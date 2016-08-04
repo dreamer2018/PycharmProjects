@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import *
 from DjangoLearn.view import *
+from django.contrib import admin
 
 urlpatterns = [
     url(r'^$',index),url(r'^hello/$',hello),url(r'^time/(\d{1,2})/$',hour_ahead),url(r'^temp/$',temp_time),url(r'^simple/$',temp_simp),
-    url(r'^local_test/$',local_test),url(r'^my/$',my)
+    url(r'^local_test/$',local_test),url(r'^my/$',my),url(r'^admin/',include(admin.site.urls))
 ]
