@@ -7,7 +7,7 @@ class Publisher(models.Model):
     city = models.CharField(max_length=60)
     state_province = models.CharField(max_length=50)
     country = models.CharField(max_length=50)
-    website = models.URLField()
+    website = models.URLField(blank=True)
 
     def __unicode__(self):
         return self.name
