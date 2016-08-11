@@ -1,8 +1,8 @@
 from django.core.mail import send_mail
-from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
+from django.shortcuts import render_to_response
 
-from books.models import Book
+from books.models import *
 
 
 # Create your views here.
@@ -45,9 +45,13 @@ def contact(request):
                 ['siteowner@example.com'],
             )
             return HttpResponseRedirect('/contact/thanks/')
-    return render_to_response('contact_form.html',{'errors':errors,
-                                                   'subject':request.POST.get('subject',''),
-                                                   'message':request.POST.get('message',''),
-                                                   'email':request.POST.get('email',''),
-                                                   })
+    return render_to_response('contact_form.html', {'errors': errors,
+                                                    'subject': request.POST.get('subject', ''),
+                                                    'message': request.POST.get('message', ''),
+                                                    'email': request.POST.get('email', ''),
+                                                    })
 
+
+def time_test(request):
+    print(type(Test.objects.all()))
+    return render_to_response('temp.html', {'current_date': Test.objects.all()})
