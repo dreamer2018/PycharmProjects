@@ -24,5 +24,5 @@ urlpatterns = [
     url(r'^simple/$', temp_simp),
     url(r'^local_test/$', local_test), url(r'^my/$', my),
     url(r'^admin/', include(admin.site.urls)), url(r'^search-form/$', views.search_form),url(r'^search/$',views.search),
-    url('^contact/$',views.contact)
+    url('^contact/$',views.contact),url(r'^test/$',views.time_test)
 ]
