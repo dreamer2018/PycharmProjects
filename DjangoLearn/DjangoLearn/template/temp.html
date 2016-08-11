@@ -1,5 +1,8 @@
 <html>
-    <body>
-        <h1>it is now {{ current_date }}</h1>
-    </body>
+<body>
+{% for item in current_date %}
+    <h1>it is now {{ item.date1 }}</h1>
+    <h1>it is now {{ item.date2 }}</h1>
+{% endfor %}
+</body>
 </html>
