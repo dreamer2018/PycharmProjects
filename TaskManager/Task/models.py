@@ -12,7 +12,7 @@ class User(models.Model):
     name = models.CharField(max_length=20, unique=True)  # 用户名，昵称
     passwd = models.CharField(max_length=20)  # 用户登陆密码
     score = models.IntegerField()  # 用户积分
-    message = models.IntegerField()  # 消息数
+    mess = models.IntegerField()  # 消息数
 
     def __unicode__(self):
         return self.name
@@ -125,7 +125,7 @@ class Book(models.Model):  # 领取任务记录
     date = models.DateTimeField()  # 订购日期
     score = models.IntegerField()  # 最终得分，任务发布者决定
     comment = models.TextField()  # 点评的内容
-    package = models.CharField()  # 任务提交结果
+    package = models.CharField(max_length=256)  # 任务提交结果
 
     def __unicode__(self):
         return self.taskid
@@ -170,7 +170,7 @@ class Book(models.Model):  # 领取任务记录
 
 class Message(models.Model):
     type = models.IntegerField()  # 消息类型，0 群发，1 某个人
-    user = models.ForeignKey(User, blank=True)  # 如果消息是群发，则忽略这条
+    user = models.ForeignKey(User)  # 如果消息是群发，则忽略这条
     context = models.TextField()  # 消息内容
     date = models.DateTimeField()  # 消息发送日期
 
