@@ -66,6 +66,7 @@ def render_mako(template_name, dictionary={}, context_instance=None):
 
 
 def render_mako_context(request, template_name, dictionary={}):
+    # type: (object, object, object) -> object
     '''render the mako template with the RequestContext and return the HttpResponse  '''
     context_instance = get_context_processors_content(request)
     # ===========================================================================
@@ -135,6 +136,6 @@ def get_context_processors_content(request):
         for processors in cp_func_list:
             context.update(processors(request))
     except Exception, e:
-        logger.error("Mako: get_context_processors_content:%s" % e)
+        # logger.error("Mako: get_context_processors_content:%s" % e)
         context = Context()
     return context

@@ -54,12 +54,23 @@ class User(models.Model):
             return True, user
 
     def getUserByName(self, user_name):
-        try:
-            user = User.objects.get(name=user_name)
-        except User.DoesNotExist:
+        user = User.objects.filter(name=user_name)
+        if len(user) == 0:
             return False, "user name %s does not found!" % user_name
         else:
-            return True, user_name
+            return True, user
+
+    def check_passwd(self, username, password):
+        status, user = User().getUserByName(username)
+        if status:
+            user = user[0]
+            print 'user:' + user.name
+            if user.passwd == password:
+                return True
+            else:
+                return False
+        else:
+            return False
 
 
 class Task(models.Model):
@@ -71,6 +82,7 @@ class Task(models.Model):
     level = models.IntegerField()  # 任务等级（难度，分为三级（初，中，高）
     score = models.IntegerField()  # 积分
     status = models.IntegerField()  # 任务状态，0为已过期，1为已停用
+    follow = models.IntegerField(default=0)  # 任务认领数量
 
     def __unicode__(self):
         return self.title
@@ -118,6 +130,27 @@ class Task(models.Model):
         else:
             return True, task
 
+    def addFollow(self, taskid):
+        status, task = Task().getTaskById(taskid)
+        if status:
+            task.follow += 1
+            task.save()
+            return True
+        else:
+            return False
+
+    def getTaskByNumber(self, sign=0, number=1):
+        if number >= 0:
+            if sign == 0:
+                tasks = Task.objects.all().order_by('-id')[:number]
+            elif sign == 1:
+                tasks = Task.objects.all().order_by('-follow')[:number]
+            else:
+                tasks = Task.objects.all()
+            return tasks
+        else:
+            return None
+
 
 class Book(models.Model):  # 领取任务记录
     task = models.ForeignKey(Task)  # 任务id
@@ -159,13 +192,20 @@ class Book(models.Model):  # 领取任务记录
         else:
             return True, book
 
-    def getBookByUser(self, user):
-        book = Book.objects.filter(user=user)
+    def getBookByUser(self, userid):
+        book = Book.objects.filter(user_id=userid)
         return book
 
     def getBookByTask(self, task):
         book = Book.objects.filter(task)
         return book
+
+    def isBooked(self, userid, taskid):
+        book = Book().getBookByUser(userid)
+        for b in book:
+            if taskid == b.id:
+                return True
+        return False
 
 
 class Message(models.Model):
@@ -211,3 +251,7 @@ class Message(models.Model):
             return False, "message id %d does not found!" % message_id
         else:
             return True, message
+
+
+if __name__ == '__main__':
+    print User().check_passwd(1, 1)
