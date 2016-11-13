@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
 """
 Django settings for TaskManager project.
 
@@ -54,7 +57,7 @@ ROOT_URLCONF = 'TaskManager.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -98,5 +101,19 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
+# mako的相关配置
+PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT, PROJECT_MODULE_NAME = os.path.split(PROJECT_PATH)
+PROJECT_DIR, __ = os.path.split(PROJECT_ROOT)
+
+MAKO_TEMPLATE_DIR = (
+    os.path.join(PROJECT_ROOT, 'templates'),
+)
+MAKO_TEMPLATE_MODULE_DIR = (
+    os.path.join(PROJECT_DIR, 'templates_module', 'Task')
+)
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(os.path.dirname(__file__), '../static/').replace('\\', '/'),
+)
