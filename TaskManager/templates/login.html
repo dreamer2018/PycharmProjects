@@ -12,9 +12,9 @@
 <section class="container">
     <div class="login">
         <h1>用户登录</h1>
-        <form method="post" action="/login_test">
-            {% csrf_token %}
-            <p><input type="text" name="phone" placeholder="手机号"></p>
+        <form method="post" action="/LoginVerify">
+            <input type="hidden" name="csrfmiddlewaretoken" value="${csrf_token}"/>
+            <p><input type="text" name="username" placeholder="用户名"></p>
             <p><input type="password" name="password" placeholder="密码"></p>
             <p class="remember_me">
                 <label>
@@ -23,7 +23,9 @@
             </p>
             <p class="submit"><input type="submit" name="commit" value="登录"></p>
         </form>
+        <p style="color: #b50d2c;font-size: 16px;">${message}</p>
     </div>
+
 </section>
 </body>
 </html>
