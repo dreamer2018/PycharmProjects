@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 from django.http import HttpResponseRedirect
+from django.utils.datastructures import MultiValueDictKeyError
 
 from mymako import render_mako_context
 from Task.models import *
@@ -48,14 +49,44 @@ def all_task(request):
     if request.session['userid'] <= 0:
         return HttpResponseRedirect('/login/')
     userid = request.session['userid']
-    user = User().getUserById(userid)
+    user = User().getUserById(userid)[1]
     tasks = Task().getTaskByNumber(sign=2)
     return render_mako_context(request, 'alltask.html', {'users': user, 'tasks': tasks})
 
 
 def add_task(request):
-    return render_mako_context(request, 'addtask.html', {'test': 'test'})
-
+    try:
+        request.POST['title']
+    except MultiValueDictKeyError:
+        return render_mako_context(request, 'addtask.html', {'message': ''})
+    else:
+        title = request.POST['title']
+        level = request.POST['level']
+        score = request.POST['score']
+        end = request.POST['end']
+        email = request.POST['email']
+        context = request.POST['context']
+        message = ""
+        if len(title) == 0 or len(title.strip()) == 0:
+            message = "标题不能为空！"
+        elif level != 1 or level != 2 or level != 3:
+            message = "难度返回错误！"
+        elif len(score) == 0 or len(score.strip()) == 0:
+            message = "积分填写错误！"
+        elif len(end) == 0 or len(end.strip()) == 0:
+            message = "时间返回错误！"
+        elif len(email) == 0 or len(email.strip()) == 0:
+            message = "邮件不能为空！"
+        elif len(context) == 0 or len(context.strip()) == 0:
+            message = "概述不能为空！"
+        else:
+            return render_mako_context(request, 'addtask.html', )
+        return render_mako_context(request, 'addtask.html',{
+            'title':title,
+            "level":level,
+            'score':score,
+            'email':email,
+        })
 
 def my_create(request):
     return render_mako_context(request, 'mycreate.html', {'test': 'test'})

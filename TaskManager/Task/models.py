@@ -79,7 +79,7 @@ class Task(models.Model):
     user = models.ForeignKey(User)  # 发布者
     start = models.DateTimeField()  # 任务开始时间
     end = models.DateTimeField()  # 任务截止时间
-    level = models.IntegerField()  # 任务等级（难度，分为三级（初，中，高）
+    level = models.IntegerField()  # 任务等级（难度，分为三级（初1，中2，高3）
     score = models.IntegerField()  # 积分
     status = models.IntegerField()  # 任务状态，0为已过期，1为已停用
     follow = models.IntegerField(default=0)  # 任务认领数量

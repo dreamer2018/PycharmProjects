@@ -14,7 +14,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from Task.views import login, login_verify, index
+from Task.views import login, login_verify, index, all_task, add_task, my_create, my_follow
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -22,7 +22,11 @@ urlpatterns = [
 Task = [
     url(r'^$', index),
     url(r'^login/$', login),
-    url(r'^LoginVerify', login_verify),
+    url(r'^LoginVerify/$', login_verify),
+    url(r'^AllTask/$', all_task),
+    url(r'^AddTask/$', add_task),
+    url(r'^MyCreate/$', my_create),
+    url(r'^MyFollow/$', my_follow),
 
 ]
 urlpatterns += Task

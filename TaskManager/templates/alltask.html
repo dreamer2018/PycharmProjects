@@ -11,7 +11,7 @@
     <link href="http://o.qcloud.com/static_api/v3/assets/bootstrap-3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <link href="http://o.qcloud.com/static_api/v3/assets/fontawesome/css/font-awesome.css" rel="stylesheet">
     <!-- 当前项目样式文件 -->
-   <link href="/static/css/sb-admin.css" rel="stylesheet">
+    <link href="/static/css/sb-admin.css" rel="stylesheet">
     <link href="/static/css/sb-bk-theme.css" rel="stylesheet">
     <!--蓝鲸平台APP 公用的样式文件 -->
 
@@ -24,7 +24,9 @@
 </head>
 
 <body>
-
+<%!
+from Task.models import User,Book
+%>
 <div id="wrapper">
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -148,10 +150,10 @@
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li class="active">
+                <li>
                     <a href="/"><i class="fa fa-fw fa-dashboard"></i> 首页</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="/AllTask"><i class="fa fa-fw fa-table"></i>所有任务</a>
                 </li>
                 <li>
@@ -233,156 +235,53 @@
                     <table class="table table-out-bordered table-hover">
                         <thead>
                         <tr>
-                            <th style="width: 10px">
-                                <input type="checkbox" class="del-all-cb">
-                            </th>
-                            <th style="width:50px;">序号</th>
-                            <th>用户账号</th>
-                            <th>角色</th>
-                            <th>用户名</th>
-                            <th>性别</th>
-                            <th>邮箱</th>
-                            <th>手机号</th>
-                            <th>地区</th>
-                            <th>注册时间</th>
-                            <th>状态</th>
+                            <th>标题</th>
+                            <th>开始时间</th>
+                            <th>截止时间</th>
+                            <th>难度</th>
+                            <th>分数</th>
+                            <th>发布者</th>
+                            <th>认领人数</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
+                        % if len(tasks) != 0:
+                        % for task in tasks:
                         <tr>
-                            <td>
-                                <input type="checkbox" name="del-cb">
-                            </td>
-                            <td>1</td>
-                            <td>admin</td>
-                            <td>系统管理员</td>
-                            <td>admin</td>
-                            <td>男</td>
-                            <td>123344@gamil.com</td>
-                            <td>13502569874</td>
-                            <td>广东省-广州市</td>
-                            <td>2015-06-07 21:45</td>
-                            <td><span class="text-warning fb">待审核</span></td>
+                            <td>${task.title}</td>
+                            <td>${task.start}</td>
+                            <td>${task.end}</td>
+                            % if task.level == 0:
+                            <td>初级</td>
+                            % elif task.level == 1:
+                            <td>中级</td>
+                            % else:
+                            <td>高级</td>
+                            % endif
+                            <td>${task.score}</td>
+                            <%
+                            user = User().getUserById(task.user_id)[1]
+                            name = user.name
+                            %>
+                            <td>${name}</td>
+                            <td>${task.follow}</td>
+                            % if users.name == name:
                             <td>
                                 <a href="#" class="mr15">编辑</a>
-                                <a href="#">已审核</a>
                             </td>
+                            % elif Book().isBooked(users.id, task.id):
+                            <td>
+                                <a href="#" class="mr15">退领</a>
+                            </td>
+                            % else:
+                            <td>
+                                <a href="#" class="mr15">认领</a>
+                            </td>
+                            % endif
                         </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="del-cb">
-                            </td>
-                            <td>1</td>
-                            <td>admin</td>
-                            <td>系统管理员</td>
-                            <td>admin</td>
-                            <td>男</td>
-                            <td>123344@gamil.com</td>
-                            <td>13502569874</td>
-                            <td>广东省-广州市</td>
-                            <td>2015-06-07 21:45</td>
-                            <td><span class="text-success fb">审核通过</span></td>
-                            <td>
-                                <a href="#" class="mr15">编辑</a>
-                                <a href="#">已审核</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="del-cb">
-                            </td>
-                            <td>1</td>
-                            <td>admin</td>
-                            <td>系统管理员</td>
-                            <td>admin</td>
-                            <td>男</td>
-                            <td>123344@gamil.com</td>
-                            <td>13502569874</td>
-                            <td>广东省-广州市</td>
-                            <td>2015-06-07 21:45</td>
-                            <td><span class="text-warning fb">待审核</span></td>
-                            <td>
-                                <a href="#" class="mr15">编辑</a>
-                                <a href="#">已审核</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="del-cb">
-                            </td>
-                            <td>1</td>
-                            <td>admin</td>
-                            <td>系统管理员</td>
-                            <td>admin</td>
-                            <td>男</td>
-                            <td>123344@gamil.com</td>
-                            <td>13502569874</td>
-                            <td>广东省-广州市</td>
-                            <td>2015-06-07 21:45</td>
-                            <td><span class="text-success fb">审核通过</span></td>
-                            <td>
-                                <a href="#" class="mr15">编辑</a>
-                                <a href="#">已审核</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="del-cb">
-                            </td>
-                            <td>1</td>
-                            <td>admin</td>
-                            <td>系统管理员</td>
-                            <td>admin</td>
-                            <td>男</td>
-                            <td>123344@gamil.com</td>
-                            <td>13502569874</td>
-                            <td>广东省-广州市</td>
-                            <td>2015-06-07 21:45</td>
-                            <td><span class="text-success fb">审核通过</span></td>
-                            <td>
-                                <a href="#" class="mr15">编辑</a>
-                                <a href="#">已审核</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="del-cb">
-                            </td>
-                            <td>1</td>
-                            <td>admin</td>
-                            <td>系统管理员</td>
-                            <td>admin</td>
-                            <td>男</td>
-                            <td>123344@gamil.com</td>
-                            <td>13502569874</td>
-                            <td>广东省-广州市</td>
-                            <td>2015-06-07 21:45</td>
-                            <td><span class="text-success fb">审核通过</span></td>
-                            <td>
-                                <a href="#" class="mr15">编辑</a>
-                                <a href="#">已审核</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="del-cb">
-                            </td>
-                            <td>1</td>
-                            <td>admin</td>
-                            <td>系统管理员</td>
-                            <td>admin</td>
-                            <td>男</td>
-                            <td>123344@gamil.com</td>
-                            <td>13502569874</td>
-                            <td>广东省-广州市</td>
-                            <td>2015-06-07 21:45</td>
-                            <td><span class="text-warning fb">待审核</span></td>
-                            <td>
-                                <a href="#" class="mr15">编辑</a>
-                                <a href="#">已审核</a>
-                            </td>
-                        </tr>
+                        % endfor
+                        % endif
                         </tbody>
                         <tfoot>
                         <tr>

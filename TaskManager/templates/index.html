@@ -23,7 +23,7 @@
 </head>
 <body>
 <%!
- from Task.models import User,Book
+from Task.models import User,Book
 %>
 <div id="wrapper">
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -174,40 +174,40 @@
                         </thead>
                         <tbody>
                         % if len(new) != 0:
-                            % for task in new:
-                            <tr>
-                                <td>${task.title}</td>
-                                <td>${task.start}</td>
-                                <td>${task.end}</td>
-                                % if task.level == 0:
-                                <td>初级</td>
-                                % elif task.level == 1:
-                                <td>中级</td>
-                                % else:
-                                <td>高级</td>
-                                % endif
-                                <td>${task.score}</td>
-                                <%
-                                    user = User().getUserById(task.user_id)[1]
-                                    name = user.name
-                                %>
-                                <td>${name}</td>
-                                <td>${task.follow}</td>
-                                % if users.name == name:
-                                    <td>
-                                        <a href="#" class="mr15">编辑</a>
-                                    </td>
-                                % elif Book().isBooked(users.id, task.id):
-                                    <td>
-                                        <a href="#" class="mr15">退领</a>
-                                    </td>
-                                % else:
-                                    <td>
-                                        <a href="#" class="mr15">认领</a>
-                                    </td>
-                                % endif
-                            </tr>
-                            % endfor
+                        % for task in new:
+                        <tr>
+                            <td>${task.title}</td>
+                            <td>${task.start}</td>
+                            <td>${task.end}</td>
+                            % if task.level == 0:
+                            <td>初级</td>
+                            % elif task.level == 1:
+                            <td>中级</td>
+                            % else:
+                            <td>高级</td>
+                            % endif
+                            <td>${task.score}</td>
+                            <%
+                            user = User().getUserById(task.user_id)[1]
+                            name = user.name
+                            %>
+                            <td>${name}</td>
+                            <td>${task.follow}</td>
+                            % if users.name == name:
+                            <td>
+                                <a href="#" class="mr15">编辑</a>
+                            </td>
+                            % elif Book().isBooked(users.id, task.id):
+                            <td>
+                                <a href="#" class="mr15">退领</a>
+                            </td>
+                            % else:
+                            <td>
+                                <a href="#" class="mr15">认领</a>
+                            </td>
+                            % endif
+                        </tr>
+                        % endfor
                         % endif
                         </tbody>
                     </table>
@@ -234,7 +234,7 @@
                     <table class="table table-out-bordered table-hover">
                         <thead>
                         <tr>
-                           <th>标题</th>
+                            <th>标题</th>
                             <th>开始时间</th>
                             <th>截止时间</th>
                             <th>难度</th>
@@ -246,40 +246,40 @@
                         </thead>
                         <tbody>
                         % if len(hot) != 0:
-                            % for task in hot:
-                            <tr>
-                                <td>${task.title}</td>
-                                <td>${task.start}</td>
-                                <td>${task.end}</td>
-                                % if task.level == 0:
-                                <td>初级</td>
-                                % elif task.level == 1:
-                                <td>中级</td>
-                                % else:
-                                <td>高级</td>
-                                % endif
-                                <td>${task.score}</td>
-                                <%
-                                    user = User().getUserById(task.user_id)[1]
-                                    name = user.name
-                                %>
-                                <td>${name}</td>
-                                <td>${task.follow}</td>
-                                % if users.name == name:
-                                    <td>
-                                        <a href="#" class="mr15">编辑</a>
-                                    </td>
-                                % elif Book().isBooked(users.id, task.id):
-                                    <td>
-                                        <a href="#" class="mr15">退领</a>
-                                    </td>
-                                % else:
-                                    <td>
-                                        <a href="#" class="mr15">认领</a>
-                                    </td>
-                                % endif
-                            </tr>
-                            % endfor
+                        % for task in hot:
+                        <tr>
+                            <td>${task.title}</td>
+                            <td>${task.start}</td>
+                            <td>${task.end}</td>
+                            % if task.level == 0:
+                            <td>初级</td>
+                            % elif task.level == 1:
+                            <td>中级</td>
+                            % else:
+                            <td>高级</td>
+                            % endif
+                            <td>${task.score}</td>
+                            <%
+                            user = User().getUserById(task.user_id)[1]
+                            name = user.name
+                            %>
+                            <td>${name}</td>
+                            <td>${task.follow}</td>
+                            % if users.name == name:
+                            <td>
+                                <a href="#" class="mr15">编辑</a>
+                            </td>
+                            % elif Book().isBooked(users.id, task.id):
+                            <td>
+                                <a href="#" class="mr15">退领</a>
+                            </td>
+                            % else:
+                            <td>
+                                <a href="#" class="mr15">认领</a>
+                            </td>
+                            % endif
+                        </tr>
+                        % endfor
                         % endif
                         </tbody>
                     </table>
