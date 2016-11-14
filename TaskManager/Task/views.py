@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
+
 from django.http import HttpResponseRedirect
 
 from mymako import render_mako_context
@@ -34,11 +35,31 @@ def login_verify(request):
 
 
 def index(request):
-    print request.session['userid']
     if request.session['userid'] <= 0:
         return HttpResponseRedirect('/login/')
     userid = request.session['userid']
     user = User().getUserById(userid)[1]
-    print user.name
-    tasks = Task().getTaskByNumber(number=10)
-    return render_mako_context(request, 'index.html', {'users': user, 'tasks': tasks})
+    new = Task().getTaskByNumber(number=10)
+    hot = Task().getTaskByNumber(sign=1, number=10)
+    return render_mako_context(request, 'index.html', {'users': user, 'new': new, 'hot': hot})
+
+
+def all_task(request):
+    if request.session['userid'] <= 0:
+        return HttpResponseRedirect('/login/')
+    userid = request.session['userid']
+    user = User().getUserById(userid)
+    tasks = Task().getTaskByNumber(sign=2)
+    return render_mako_context(request, 'alltask.html', {'users': user, 'tasks': tasks})
+
+
+def add_task(request):
+    return render_mako_context(request, 'addtask.html', {'test': 'test'})
+
+
+def my_create(request):
+    return render_mako_context(request, 'mycreate.html', {'test': 'test'})
+
+
+def my_follow(request):
+    return render_mako_context(request, 'myfollow.html', {'test': 'test'})

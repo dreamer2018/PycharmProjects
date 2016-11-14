@@ -26,9 +26,7 @@
  from Task.models import User,Book
 %>
 <div id="wrapper">
-    <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -41,12 +39,10 @@
                 作业管理系统
             </a>
         </div>
-        <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
             <li class="dropdown">
                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b
                         class="caret"></b></a>
-                <!--消息提醒-->
                 <ul class="dropdown-menu message-dropdown">
                     <li class="message-preview">
                         <a href="javascript:;">
@@ -123,23 +119,23 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li class="active">
-                    <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> 首页</a>
+                    <a href="/"><i class="fa fa-fw fa-dashboard"></i> 首页</a>
                 </li>
                 <li>
-                    <a href="tables.html"><i class="fa fa-fw fa-table"></i>所有任务</a>
+                    <a href="/AllTask"><i class="fa fa-fw fa-table"></i>所有任务</a>
                 </li>
                 <li>
-                    <a href="forms.html"><i class="fa fa-fw fa-edit"></i>发布任务</a>
+                    <a href="/AddTask"><i class="fa fa-fw fa-edit"></i>发布任务</a>
                 </li>
                 <li>
                     <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i
                             class="fa fa-fw fa-arrows-v"></i>任务管理<i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="demo" class="collapse">
                         <li>
-                            <a href="create.html">已发布任务</a>
+                            <a href="/MyCreate">已发布任务</a>
                         </li>
                         <li>
-                            <a href="receive.html">已领取任务</a>
+                            <a href="/MyFollow">已领取任务</a>
                         </li>
                     </ul>
                 </li>
@@ -149,84 +145,6 @@
     </nav>
 
     <div id="page-wrapper">
-
-        <div class="container-fluid">
-            <!-- Page Heading -->
-            <div class="row page-header-box">
-                <div class="col-lg-12">
-                    <h1 class="page-header">
-                        概述
-                    </h1>
-                </div>
-            </div>
-            <!-- /.row -->
-
-            <div class="row data-panel">
-                <div class="col-lg-3 col-md-6">
-                    <div class="king-widget2">
-                        <div class="king-widget-content p20 bg-info">
-                            <div class="king-counter king-counter-lg">
-                                <div class="king-counter-label text-uppercase f16">所有任务</div>
-                                <div class="king-counter-number-group">
-                                    <span class="king-counter-number white">260</span>
-                                    <span class="king-counter-icon ml10 white">
-                                            <i class="fa fa-image"></i>
-                                        </span>
-                                </div>
-                                <div class="king-counter-label text-uppercase f16">followers</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="king-widget2">
-                        <div class="king-widget-content p20 bg-info">
-                            <div class="king-counter king-counter-lg">
-                                <div class="king-counter-label text-uppercase f16">已认领</div>
-                                <div class="king-counter-number-group">
-                                    <span class="king-counter-number white">300</span>
-                                    <span class="king-counter-icon ml10 white">
-                                            <i class="fa fa-music"></i>
-                                        </span>
-                                </div>
-                                <div class="king-counter-label text-uppercase f16">followers</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="king-widget2">
-                        <div class="king-widget-content p20 bg-info">
-                            <div class="king-counter king-counter-lg">
-                                <div class="king-counter-label text-uppercase f16">完成中</div>
-                                <div class="king-counter-number-group">
-                                    <span class="king-counter-number white">110</span>
-                                    <span class="king-counter-icon ml10 white">
-                                        <i class="fa fa-envelope"></i>
-                                    </span>
-                                </div>
-                                <div class="king-counter-label text-uppercase f16">followers</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="king-widget2">
-                        <div class="king-widget-content p20 bg-info">
-                            <div class="king-counter king-counter-lg">
-                                <div class="king-counter-label text-uppercase f16">已完成</div>
-                                <div class="king-counter-number-group">
-                                    <span class="king-counter-number white">50</span>
-                                    <span class="king-counter-number-related white">+</span>
-                                </div>
-                                <div class="king-counter-label text-uppercase f16">followers</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /.container-fluid -->
         <div class="container-fluid">
             <!-- Page Heading -->
             <div class="row page-header-box">
@@ -255,8 +173,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        % if len(tasks) != 0:
-                            % for task in tasks:
+                        % if len(new) != 0:
+                            % for task in new:
                             <tr>
                                 <td>${task.title}</td>
                                 <td>${task.start}</td>
@@ -316,61 +234,53 @@
                     <table class="table table-out-bordered table-hover">
                         <thead>
                         <tr>
-                            <th>用户账号</th>
-                            <th>角色</th>
-                            <th>用户名</th>
-                            <th>性别</th>
-                            <th>邮箱</th>
-                            <th>手机号</th>
-                            <th>地区</th>
-                            <th>注册时间</th>
-                            <th>状态</th>
+                           <th>标题</th>
+                            <th>开始时间</th>
+                            <th>截止时间</th>
+                            <th>难度</th>
+                            <th>分数</th>
+                            <th>发布者</th>
+                            <th>认领人数</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>admin</td>
-                            <td>系统管理员</td>
-                            <td>admin</td>
-                            <td>男</td>
-                            <td>123344@gamil.com</td>
-                            <td>13502569874</td>
-                            <td>广东省-广州市</td>
-                            <td>2015-06-07 21:45</td>
-                            <td><span class="text-warning fb">待审核</span></td>
-                            <td>
-                                <a href="#" class="mr15">认领</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>admin</td>
-                            <td>系统管理员</td>
-                            <td>admin</td>
-                            <td>男</td>
-                            <td>123344@gamil.com</td>
-                            <td>13502569874</td>
-                            <td>广东省-广州市</td>
-                            <td>2015-06-07 21:45</td>
-                            <td><span class="text-success fb">审核通过</span></td>
-                            <td>
-                                <a href="#" class="mr15">认领</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>admin</td>
-                            <td>系统管理员</td>
-                            <td>admin</td>
-                            <td>男</td>
-                            <td>123344@gamil.com</td>
-                            <td>13502569874</td>
-                            <td>广东省-广州市</td>
-                            <td>2015-06-07 21:45</td>
-                            <td><span class="text-warning fb">待审核</span></td>
-                            <td>
-                                <a href="#" class="mr15">认领</a>
-                            </td>
-                        </tr>
+                        % if len(hot) != 0:
+                            % for task in hot:
+                            <tr>
+                                <td>${task.title}</td>
+                                <td>${task.start}</td>
+                                <td>${task.end}</td>
+                                % if task.level == 0:
+                                <td>初级</td>
+                                % elif task.level == 1:
+                                <td>中级</td>
+                                % else:
+                                <td>高级</td>
+                                % endif
+                                <td>${task.score}</td>
+                                <%
+                                    user = User().getUserById(task.user_id)[1]
+                                    name = user.name
+                                %>
+                                <td>${name}</td>
+                                <td>${task.follow}</td>
+                                % if users.name == name:
+                                    <td>
+                                        <a href="#" class="mr15">编辑</a>
+                                    </td>
+                                % elif Book().isBooked(users.id, task.id):
+                                    <td>
+                                        <a href="#" class="mr15">退领</a>
+                                    </td>
+                                % else:
+                                    <td>
+                                        <a href="#" class="mr15">认领</a>
+                                    </td>
+                                % endif
+                            </tr>
+                            % endfor
+                        % endif
                         </tbody>
                     </table>
                 </div>

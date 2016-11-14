@@ -151,6 +151,10 @@ class Task(models.Model):
         else:
             return None
 
+    def getTaskNumber(self):
+        number = Task.objects.count()
+        return number
+
 
 class Book(models.Model):  # 领取任务记录
     task = models.ForeignKey(Task)  # 任务id
