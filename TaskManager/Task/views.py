@@ -58,7 +58,9 @@ def add_task(request):
     try:
         request.POST['title']
     except MultiValueDictKeyError:
-        return render_mako_context(request, 'addtask.html', {'message': ''})
+        return render_mako_context(request, 'addtask.html',
+                                   {'message': '', 'title': '', 'score': '', 'email': '',
+                                    'cont': ''})
     else:
         title = request.POST['title']
         level = request.POST['level']
@@ -66,27 +68,26 @@ def add_task(request):
         end = request.POST['end']
         email = request.POST['email']
         context = request.POST['context']
-        message = ""
+        print level
         if len(title) == 0 or len(title.strip()) == 0:
-            message = "标题不能为空！"
-        elif level != 1 or level != 2 or level != 3:
-            message = "难度返回错误！"
+            message = u"标题不能为空！"
+        elif level != '1' and level != '2' and level != '3':
+            message = u"难度返回错误！"
         elif len(score) == 0 or len(score.strip()) == 0:
-            message = "积分填写错误！"
+            message = u"积分填写错误！"
         elif len(end) == 0 or len(end.strip()) == 0:
-            message = "时间返回错误！"
+            message = u"时间返回错误！"
         elif len(email) == 0 or len(email.strip()) == 0:
-            message = "邮件不能为空！"
+            message = u"邮件不能为空！"
         elif len(context) == 0 or len(context.strip()) == 0:
-            message = "概述不能为空！"
+            message = u"概述不能为空！"
         else:
-            return render_mako_context(request, 'addtask.html', )
-        return render_mako_context(request, 'addtask.html',{
-            'title':title,
-            "level":level,
-            'score':score,
-            'email':email,
-        })
+            return render_mako_context(request, 'addtask.html', {'message': u'添加成功!', 'title': '', 'score': '', 'email': '',
+                                                                 'cont': ''})
+        return render_mako_context(request, 'addtask.html',
+                                   {'message': message, 'title': title, 'score': score, 'email': email,
+                                    'cont': context})
+
 
 def my_create(request):
     return render_mako_context(request, 'mycreate.html', {'test': 'test'})

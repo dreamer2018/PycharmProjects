@@ -202,12 +202,13 @@
                     </div>
                     <div class="panel-body">
                         <div class="col-sm-8">
-                            <form class="form-horizontal mt15" id="user_form" action="/AddTask/" method="post">
+                            <form class="form-horizontal mt15" id="user_form" action="/AddTask/" method="post"  onsubmit="return insert()">
                                 <input type="hidden" name="csrfmiddlewaretoken" value="${csrf_token}"/>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label" >标题：</label>
+                                    <label class="col-sm-2 control-label">标题：</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="请填写任务标题" name = "title">
+                                        <input type="text" class="form-control" placeholder="请填写任务标题" name="title"
+                                               value="${title}" required>
                                         <span class="king-required-tip text-danger ml5">*</span>
                                     </div>
                                 </div>
@@ -225,8 +226,8 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">积分：</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="请填写积分数" id="user_phone"
-                                               name="score">
+                                        <input type="number" min="0" max="100" class="form-control"
+                                               id="form8_demo1" placeholder="请填写积分数" name="score" value="${score}">
                                         <span class="king-required-tip text-danger ml5">*</span>
                                     </div>
                                 </div>
@@ -234,14 +235,14 @@
                                     <label class="col-sm-2 control-label">截止时间：</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="plugin16_demo1_3"
-                                               placeholder="选择日期时间..." name = "end">
+                                               placeholder="选择日期时间..." name="end">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">通知邮箱：</label>
                                     <div class="col-sm-10">
                                         <input type="email" class="form-control" placeholder="请填写电子邮箱" id="user_email"
-                                               name="email">
+                                               name="email" value="${email}" required>
                                         <span class="king-required-tip text-danger ml5">*</span>
                                     </div>
                                 </div>
@@ -250,16 +251,15 @@
                                     <div class="col-sm-10">
                                         <div id="editor1_demo1" style="width:100%">
                                             <textarea id="editor" rows="10" cols="30"
-                                                      style="height:280px;width:99%;margin:0 auto;"></textarea>
+                                                      style="height:280px;width:99%;margin:0 auto;">${cont}</textarea>
                                         </div>
                                     </div>
                                 </div>
-                                <input name="context" type="hidden">
+                                <input name="context" type="hidden" id="cont">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label"></label>
                                     <div class="col-sm-10">
-                                        <button class="king-btn king-info mr10" title="保存" id="context" type="submit"
-                                                onclick="insert()">
+                                        <button class="king-btn king-info mr10" title="保存" id="context" type="submit">
                                             <i class="fa fa-save btn-icon"></i>发布
                                         </button>
                                         <a class="king-btn king-default" title="返回">
@@ -269,7 +269,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-6" style="color: #dd1531;font-size: 18px">
                             ${message}
                         </div>
                     </div>
@@ -280,11 +280,62 @@
     </div>
 </div>
 
-	<!-- 如果要使用Bootstrap的js插件，必须先调入jQuery -->
-	<script src="http://o.qcloud.com/static_api/v3/assets/js/jquery-1.10.2.min.js"></script>
-	<!-- 包括所有bootstrap的js插件或者可以根据需要使用的js插件调用　-->
-	<script src="http://o.qcloud.com/static_api/v3/assets/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+<!-- 如果要使用Bootstrap的js插件，必须先调入jQuery -->
+<script src="http://o.qcloud.com/static_api/v3/assets/js/jquery-1.10.2.min.js"></script>
+<!-- 包括所有bootstrap的js插件或者可以根据需要使用的js插件调用　-->
+<script src="http://o.qcloud.com/static_api/v3/assets/bootstrap-3.3.4/js/bootstrap.min.js"></script>
 
+<script src="http://o.qcloud.com/static_api/v3/assets/kendoui-2015.2.624/js/kendo.all.min.js"></script>
+<!--富文编辑器依赖-->
+<script type="text/javascript">
+    $(function () {
+        // 编辑器(kendoEditor)
+        //editor1_demo1_js_start
+        $("#editor").kendoEditor();
+
+        $('#btns').on('click', 'button', function (e) {
+            var editor = $("#editor").data('kendoEditor');
+            var action = $(e.target).attr('name');
+
+            switch (action) {
+                    // 获取htmlt
+                case 'getHtml':
+                    alert(editor.value());
+                    break;
+                    // 设置html
+                case 'setHtml':
+                    editor.value('<h4>设置html</h4>');
+                    break;
+                    // 插入html
+                case 'insertHtml':
+                    editor.body.appendChild(editor.document.createTextNode("hello,World"));
+                    break;
+            }
+        });
+        //editor1_demo1_js_end
+    });
+
+    function insert() {
+        var editor = $("#editor").data('kendoEditor');
+        if (editor.value().length <= 0) {
+            alert("内容概述不能为空!");
+            return false
+        } else {
+            con = document.getElementById("cont");
+            con.value = editor.value();
+            return true
+        }
+    }
+
+</script>
+<!--时间日期选择器-->
+<script type="text/javascript">
+    //时间日期选择
+    $("#plugin16_demo1_3").kendoDateTimePicker({
+        value: new Date()
+    });
+
+</script>
 </body>
 
 </html>
