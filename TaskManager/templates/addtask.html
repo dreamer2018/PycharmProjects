@@ -22,6 +22,9 @@
     <!--蓝鲸平台APP 公用的样式文件 -->
 
     <link href="http://o.qcloud.com/static_api/v3/bk/css/bk.css?v=1.0.1" rel="stylesheet">
+    <link href="http://o.qcloud.com/static_api/v3/assets/daterangepicker-2.0.5/daterangepicker.css" rel="stylesheet">
+
+
     <!-- 以下两个插件用于在IE8以及以下版本浏览器支持HTML5元素和媒体查询，如果不需要用可以移除 -->
     <!--[if lt IE 9]>
     <script src="http://o.qcloud.com/static_api/v3/assets/js/html5shiv.min.js"></script>
@@ -202,7 +205,8 @@
                     </div>
                     <div class="panel-body">
                         <div class="col-sm-8">
-                            <form class="form-horizontal mt15" id="user_form" action="/AddTask/" method="post"  onsubmit="return insert()">
+                            <form class="form-horizontal mt15" id="user_form" action="/AddTask/" method="post"
+                                  onsubmit="return insert()">
                                 <input type="hidden" name="csrfmiddlewaretoken" value="${csrf_token}"/>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">标题：</label>
@@ -234,8 +238,8 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">截止时间：</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="plugin16_demo1_3"
-                                               placeholder="选择日期时间..." name="end">
+                                        <input type="text" class="form-control daterangepicker_demo"
+                                               id="daterangepicker_demo1" placeholder="选择日期..." name="end">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -286,6 +290,11 @@
 <script src="http://o.qcloud.com/static_api/v3/assets/bootstrap-3.3.4/js/bootstrap.min.js"></script>
 
 <script src="http://o.qcloud.com/static_api/v3/assets/kendoui-2015.2.624/js/kendo.all.min.js"></script>
+
+<script src="http://o.qcloud.com/static_api/v3/assets/daterangepicker-2.0.5/moment.min.js"></script>
+<script src="http://o.qcloud.com/static_api/v3/assets/daterangepicker-2.0.5/daterangepicker.js"></script>
+
+
 <!--富文编辑器依赖-->
 <script type="text/javascript">
     $(function () {
@@ -326,15 +335,21 @@
             return true
         }
     }
-
 </script>
-<!--时间日期选择器-->
 <script type="text/javascript">
-    //时间日期选择
-    $("#plugin16_demo1_3").kendoDateTimePicker({
-        value: new Date()
-    });
+    // 选择单个日期
+    $('#daterangepicker_demo1').daterangepicker({
+        locale: {
+            format: "YYYY-MM-DD HH:MM:ss"
+        },
+        autoApply: true,//选择日期后自动设置值
+        singleDatePicker: true,//单选选择一个日期
+        timePicker: true,//支持时间选择
+        timePicker24Hour: true,//开启24小时时间制
+        timePickerIncrement: 5, //分钟间隔
+        timePickerSeconds: true //开启分钟选择
 
+    });
 </script>
 </body>
 

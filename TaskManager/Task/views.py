@@ -6,6 +6,7 @@ from django.utils.datastructures import MultiValueDictKeyError
 
 from mymako import render_mako_context
 from Task.models import *
+import datetime
 
 
 # Create your views here.
@@ -82,8 +83,14 @@ def add_task(request):
         elif len(context) == 0 or len(context.strip()) == 0:
             message = u"概述不能为空！"
         else:
-            return render_mako_context(request, 'addtask.html', {'message': u'添加成功!', 'title': '', 'score': '', 'email': '',
-                                                                 'cont': ''})
+            start = datetime.datetime.now()
+            task = Task()
+            user = User().getUserById(request.session['userid'])[1]
+            ends = end + '.000000'
+            task.insert(title, context, user, start, ends, int(level), score, 0)
+            return render_mako_context(request, 'addtask.html',
+                                       {'message': u'添加成功!', 'title': '', 'score': '', 'email': '',
+                                        'cont': ''})
         return render_mako_context(request, 'addtask.html',
                                    {'message': message, 'title': title, 'score': score, 'email': email,
                                     'cont': context})
